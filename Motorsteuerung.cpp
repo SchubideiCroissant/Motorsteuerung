@@ -14,18 +14,25 @@ void setup_pwm(uint gpio, uint wrap) {
 
 int main() {
     stdio_init_all(); // Initialisiere Standard-I/O
-
-    setup_pwm(LED_PIN, 255);  // PWM auf 8-Bit Auflösung konfigurieren (0-255)
+    uint wrap_val = 4095;
+    setup_pwm(LED_PIN, wrap_val);  // PWM auf 8-Bit Auflösung konfigurieren (0-255)
 
     while (true) {
         // Dimme die LED stufenweise hoch und runter
-        for (int level = 0; level <= 255; level++) {
+        for (int level = 0; level <= wrap_val; level++) {
             pwm_set_gpio_level(LED_PIN, level);  // PWM-Wert setzen
-            sleep_ms(10);  // Kurze Verzögerung für sanftes Dimmen
+            sleep_ms(2);  // Kurze Verzögerung für sanftes Dimmen
+            if (level % (wrap_val / 5) == 0) { // wrap_val / 5 entspricht 20% des maximalen Wertes
+                printf("PWM-Level: %d%%\n", (level * 100) / wrap_val);
+            }
+        
         }
-        for (int level = 255; level >= 0; level--) {
+        for (int level = wrap_val; level >= 0; level--) {
             pwm_set_gpio_level(LED_PIN, level);  // PWM-Wert setzen
-            sleep_ms(10);  // Kurze Verzögerung für sanftes Dimmen
+            sleep_ms(2);  // Kurze Verzögerung für sanftes Dimmen
+            if (level % (wrap_val / 5) == 0) {
+                printf("PWM-Level: %d%%\n", (level * 100) / wrap_val);
+            }
         }
     }
 
