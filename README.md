@@ -29,13 +29,13 @@ Dieses Projekt steuert einen einfachen Gleichstrommotor (DC-Motor) mit einer Spa
                                     |               |
                                     |    [Gate] (G) | -------------------------- GPIO_PIN (z.B. 15)
                                     |               |           |                (Mikrocontroller)
-                                    |               |           |  
-                                    |                           |   
-                                    |                           |               
-                                    |                           |
-                                [Source] (S)             [10k Pulldown]
-                                        |                       |
-                                        |                       |
+                                    |               |           |                    [µC GND]
+                                    |                           |                       |
+                                    |                           |                       |
+                                    |                           |                       |
+                                [Source] (S)             [10k Pulldown]                 |
+                                        |                       |                       |
+                                        |                       |                       |
                GND (Masse)     ---------------------------------------------------------------               
                                           (gemeinsame Masse)
 
